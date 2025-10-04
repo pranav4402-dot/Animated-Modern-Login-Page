@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animated Modern Login Page</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --secondary: #fff;
+      --background: #f4f6fd;
+      --shadow: rgba(100, 100, 100, 0.1);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--background);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .container {
+      background: var(--secondary);
+      box-shadow: 0 4px 32px var(--shadow);
+      border-radius: 20px;
+      padding: 50px 40px 40px 40px;
+      width: 350px;
+      position: relative;
+      animation: fadeInUp 1s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes fadeInUp {
+      0% {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .container:before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--primary), #877EFF);
+      border-radius: 50%;
+      box-shadow: 0 8px 32px var(--shadow);
+      z-index: 0;
+      animation: blobMove 2s ease-in-out infinite alternate;
+    }
+    @keyframes blobMove {
+      0% { transform: translateX(-50%) scale(1); }
+      100% { transform: translateX(-50%) scale(1.08) rotate(8deg);}
+    }
+    h2 {
+      font-weight: 700;
+      margin-bottom: 28px;
+      color: var(--primary);
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      background: #f4f6fd;
+      font-size: 1rem;
+      transition: box-shadow 0.2s;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+    .input-group input:focus {
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+    .input-group .icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #bfbfbf;
+      font-size: 1.2em;
+      transition: color 0.2s;
+    }
+    .input-group input:focus ~ .icon {
+      color: var(--primary);
+    }
+    .button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--primary), #877EFF);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 2px 8px var(--shadow);
+      margin-bottom: 12px;
+    }
+    .button:hover {
+      background: linear-gradient(90deg, #877EFF, var(--primary));
+      transform: translateY(-2px) scale(1.03);
+    }
+    .links {
+      text-align: center;
+      margin-top: 8px;
+    }
+    .links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.96em;
+      transition: color 0.2s;
+    }
+    .links a:hover {
+      color: #877EFF;
+      text-decoration: underline;
+    }
+    /* Animated floating circles for background */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 7s infinite alternate linear;
+      z-index: -1;
+    }
+    .circle.one {
+      width: 120px;
+      height: 120px;
+      background: var(--primary);
+      top: 8%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+    .circle.two {
+      width: 90px;
+      height: 90px;
+      background: #877EFF;
+      top: 70%;
+      left: 85%;
+      animation-delay: 2s;
+    }
+    .circle.three {
+      width: 60px;
+      height: 60px;
+      background: #a2a7ff;
+      top: 80%;
+      left: 10%;
+      animation-delay: 4s;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-24px) scale(1.1);}
+    }
+  </style>
+  <!-- Use Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/9c2ed5740f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="circle one"></div>
+  <div class="circle two"></div>
+  <div class="circle three"></div>
+  <form class="container" autocomplete="off">
+    <h2>Welcome Back</h2>
+    <div class="input-group">
+      <input type="text" id="username" placeholder="Username" required autofocus />
+      <span class="icon"><i class="fas fa-user"></i></span>
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" required />
+      <span class="icon"><i class="fas fa-lock"></i></span>
+    </div>
+    <button type="submit" class="button">Login</button>
+    <div class="links">
+      <a href="#">Forgot Password?</a> &nbsp;|&nbsp;
+      <a href="#">Sign Up</a>
+    </div>
+  </form>
+  <script>
+    // Simple button animation on submit
+    document.querySelector('.container').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = document.querySelector('.button');
+      btn.textContent = 'Logging in...';
+      btn.disabled = true;
+      btn.style.background = 'linear-gradient(90deg, #a2a7ff, #877EFF)';
+      setTimeout(() => {
+        btn.textContent = 'Success!';
+        btn.style.background = 'linear-gradient(90deg, #3ec6e0, #6C63FF)';
+        setTimeout(() => {
+          btn.textContent = 'Login';
+          btn.disabled = false;
+          btn.style.background = '';
+        }, 1200);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
